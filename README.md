@@ -30,6 +30,12 @@ Run the binary:
 ./run
 ```
 
+Alternatively, you can compile and run:
+
+```bash
+./crun
+```
+
 Make changes to the test.cspine file to test any features of the language
 
 ---
