@@ -1,1 +1,1 @@
-g++ main.cpp Lexer/tokenizer.cpp AST/builder.cpp VM/vm.cpp Bytecode/byte.cpp -o cspine && ./cspine
+./cspine test.cspine

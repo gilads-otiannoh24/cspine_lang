@@ -1,22 +1,44 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "Lexer/tokenizer.h"
-#include "AST/builder.h"
+#include "AST/ast.h"
 #include "VM/vm.h"
-#include "Bytecode/byte.h"
-#include "Utils/types.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Toy language running..." << std::endl;
+    if (argc < 2)
+    {
+        std::cerr << "Usage: cspine <file.cspine>\n";
+        return 1;
+    }
 
-    // Example usage
-    tokenize("1 + 2");
-    build_ast("1");
-    parse_ast();
-    run_vm();
+    std::ifstream file(argv[1]);
+    if (!file)
+    {
+        std::cerr << "Could not open file: " << argv[1] << "\n";
+        return 1;
+    }
 
-    User u = {"ian", 1};
-    cout << u.username << endl;
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    std::string source = buffer.str();
 
-    return 0;
+    try
+    {
+        auto tokens = tokenize(source);
+
+        Parser parser(tokens);
+        auto ast = parser.parse();
+
+        VM vm;
+        int result = vm.eval(ast);
+
+        std::cout << "Result: " << result << "\n";
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "Error: " << e.what() << "\n";
+        return 1;
+    }
 }

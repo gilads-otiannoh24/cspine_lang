@@ -1,4 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "token.h"
 
-void tokenize(const std::string &source);
+std::vector<Token> tokenize(const std::string &source);

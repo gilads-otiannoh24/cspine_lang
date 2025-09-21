@@ -1,7 +1,28 @@
+#include "../AST/ast.h"
 #include "vm.h"
-#include <iostream>
+#include <stdexcept>
 
-void run_vm()
+int VM::eval(const std::shared_ptr<ASTNode> &node)
 {
-    std::cout << "Executing bytecode..." << std::endl;
+    if (node->type == ASTNodeType::Number)
+    {
+        return std::stoi(node->value);
+    }
+    else if (node->type == ASTNodeType::BinaryOp)
+    {
+        int leftVal = eval(node->left);
+        int rightVal = eval(node->right);
+
+        if (node->value == "+")
+            return leftVal + rightVal;
+        if (node->value == "-")
+            return leftVal - rightVal;
+        if (node->value == "*")
+            return leftVal * rightVal;
+        if (node->value == "/")
+            return leftVal / rightVal;
+
+        throw std::runtime_error("Unknown operator: " + node->value);
+    }
+    throw std::runtime_error("Invalid AST Node");
 }

@@ -1,0 +1,1 @@
+g++ main.cpp Lexer/tokenizer.cpp AST/parser.cpp VM/vm.cpp Bytecode/byte.cpp -o cspine

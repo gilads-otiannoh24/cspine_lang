@@ -1,3 +1,8 @@
 #pragma once
+#include "../AST/ast.h"
 
-void run_vm();
+class VM
+{
+public:
+    int eval(const std::shared_ptr<ASTNode> &node);
+};
