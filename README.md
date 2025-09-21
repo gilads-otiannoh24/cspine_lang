@@ -59,4 +59,4 @@ This is a personal learning project, but feel free to fork, play around, and sug
 
 ## 📜 License
 
-MIT License. Yoo cna do whatever you want with it.
+MIT License. You can do whatever you want with it.
