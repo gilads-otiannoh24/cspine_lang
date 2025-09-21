@@ -18,35 +18,19 @@ This project is mostly for **systems-level learning** (compilers, interpreters, 
 
 ## 🛠️ Building
 
-Make sure you have `g++` installed:
+Make sure you have `g++` installed. Run this to compile the code:
 
 ```bash
-g++ main.cpp Lexer/tokenizer.cpp AST/builder.cpp VM/vm.cpp -o cspine
+./c
 ```
 
 Run the binary:
 
 ```bash
-./cspine
+./run
 ```
 
-Alternatively, you can use the `run` script if set up.
-
----
-
-## 📖 Example Usage
-
-```bash
-./cspine
-```
-
-Example (to be expanded):
-
-```
-Toy language running...
-```
-
-Later this will support `.cspine` files with actual syntax.
+Make changes to the test.cspine file to test any features of the language
 
 ---
 
@@ -58,6 +42,8 @@ Later this will support `.cspine` files with actual syntax.
 - Experiment with toy-language design (syntax, features).
 
 ---
+
+More info is available in the docs folder.
 
 ## 🔮 Roadmap
 
