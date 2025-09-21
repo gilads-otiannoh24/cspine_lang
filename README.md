@@ -2,32 +2,6 @@
 
 _A toy programming language built in C++ for fun and learning._
 
-## 📂 Project Structure
-
-cspine_lang/
-├── AST/
-│ ├── builder.cpp # AST builder implementation
-│ └── builder.h # AST builder header
-│
-├── Bytecode/
-│ └── byte.h # Bytecode definitions
-│
-├── Lexer/
-│ ├── tokenizer.cpp # Tokenizer implementation
-│ └── tokenizer.h # Tokenizer header
-│
-├── VM/
-│ ├── vm.cpp # Virtual Machine implementation
-│ └── vm.h # Virtual Machine header
-│
-├── Utils/ # Utility helpers (if needed later)
-│
-├── main.cpp # Entry point
-├── run # Build/run helper script (optional)
-├── .gitignore
-
----
-
 ## 🚀 Overview
 
 CSpine is a **mini programming language** experiment inspired by interpreters and compilers.  
