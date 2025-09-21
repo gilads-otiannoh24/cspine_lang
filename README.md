@@ -1,4 +1,4 @@
-# CSpine Lang 🦴
+# CSpine Lang
 
 _A toy programming language built in C++ for fun and learning._
 
@@ -44,17 +44,6 @@ Make changes to the test.cspine file to test any features of the language
 ---
 
 More info is available in the docs folder.
-
-## 🔮 Roadmap
-
-- [ ] Add `.cspine` file input
-- [ ] Expand tokenizer with operators & keywords
-- [ ] Support expressions in AST
-- [ ] Define custom bytecode instructions
-- [ ] Implement full VM loop
-- [ ] Add simple standard library (print, math)
-
----
 
 ## 🤝 Contributing
 
