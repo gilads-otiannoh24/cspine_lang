@@ -7,7 +7,8 @@
 enum class ASTNodeType
 {
     Number,
-    BinaryOp
+    BinaryOp,
+    Word
 };
 
 struct ASTNode

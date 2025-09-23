@@ -2,11 +2,13 @@
 #include <vector>
 #include <cctype>
 #include <stdexcept>
+#include <algorithm>
 
 std::vector<Token> tokenize(const std::string &input)
 {
     std::vector<Token> tokens;
     size_t i = 0;
+    std::vector<std::string> keychars = {"+", "-", "*", "/", "(", ")"};
 
     while (i < input.size())
     {
@@ -53,7 +55,15 @@ std::vector<Token> tokenize(const std::string &input)
             tokens.emplace_back(TokenType::RPAREN, ")");
             break;
         default:
-            throw std::runtime_error(std::string("Unexpected character: ") + c);
+            // capture full number (multi-digit too)
+            std::string word;
+            while (i < input.size() && !std::isspace(input[i]) && std::find(keychars.begin(), keychars.end(), std::string(1, input[i])) == keychars.end())
+            {
+                word.push_back(input[i]);
+                i++;
+            }
+            tokens.emplace_back(TokenType::WORD, word);
+            continue;
         }
 
         i++;

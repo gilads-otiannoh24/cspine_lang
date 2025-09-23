@@ -10,8 +10,9 @@ enum class TokenType
     SLASH,
     LPAREN,
     RPAREN,
+    WORD,
     EOF_TOKEN,
-    END_OF_FILE
+    END_OF_FILE,
 };
 
 struct Token

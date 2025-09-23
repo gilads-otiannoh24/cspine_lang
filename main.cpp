@@ -4,6 +4,7 @@
 #include "Lexer/tokenizer.h"
 #include "AST/ast.h"
 #include "VM/vm.h"
+#include "Bytecode/byte.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,10 +32,23 @@ int main(int argc, char *argv[])
         Parser parser(tokens);
         auto ast = parser.parse();
 
-        VM vm;
-        int result = vm.eval(ast);
+        BytecodeGenerator gen;
+        auto bytecode = gen.generate(ast);
 
-        std::cout << "Result: " << result << "\n";
+        auto node = ast; // for debugging
+        bool leftDone = false;
+        std::shared_ptr<ASTNode> currentLevel;
+        auto first = true;
+
+        while (node)
+        {
+            std::cout << "Node Type: " << static_cast<int>(node->type) << ", Value: " << node->value << "\n";
+
+            node = node->left;
+        }
+
+        Interpreter vm;
+        vm.run(bytecode);
     }
     catch (std::exception &e)
     {

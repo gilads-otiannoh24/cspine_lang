@@ -1,6 +1,7 @@
 #include "../Lexer/token.h"
 #include "ast.h"
 #include <stdexcept>
+#include <iostream>
 
 Parser::Parser(const std::vector<Token> &tokens) : tokens(tokens), pos(0) {}
 
@@ -36,6 +37,7 @@ std::shared_ptr<ASTNode> Parser::parseExpression()
         newNode->right = right;
         node = newNode;
     }
+
     return node;
 }
 
@@ -60,12 +62,24 @@ std::shared_ptr<ASTNode> Parser::parseFactor()
     if (peek().type == TokenType::NUMBER)
     {
         auto n = peek();
+
         advance(); // consume number
         return std::make_shared<ASTNode>(ASTNodeType::Number, n.value);
     }
+    else if (peek().type == TokenType::WORD)
+    {
+        auto w = peek();
+        advance(); // consume word
+        auto node = std::make_shared<ASTNode>(ASTNodeType::Word, w.value);
+
+        // parse the next expression as the left child (for function calls)
+        auto next = parseExpression();
+        next->left = node;
+        return next;
+    }
     else if (peek().type == TokenType::LPAREN)
     {
-        advance(); // consume '('
+        advance();
         auto node = parseExpression();
         if (peek().type != TokenType::RPAREN)
         {
