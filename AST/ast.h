@@ -1,47 +1,24 @@
 #pragma once
 #include <memory>
-#include <string>
-#include <vector>
-#include "../Lexer/token.h"
+#include "../Utils/keywords.h"
 
 enum class ASTNodeType
 {
     Number,
     BinaryOp,
-    Word
+    Word,
+    EndOfLine,
+    EndOfFile,
 };
 
 struct ASTNode
 {
     ASTNodeType type;
-    std::string value; // for numbers or operators
+    std::string value;   // numbers, operators, identifiers
+    KeywordType keyword; // NONE if not a keyword
     std::shared_ptr<ASTNode> left;
     std::shared_ptr<ASTNode> right;
 
-    ASTNode(ASTNodeType t, std::string v)
-        : type(t), value(std::move(v)), left(nullptr), right(nullptr) {}
-};
-
-class Parser
-{
-public:
-    // Constructor takes a list of tokens
-    Parser(const std::vector<Token> &tokens);
-
-    // Main entry point for parsing (builds the AST root)
-    std::shared_ptr<ASTNode> parse();
-
-private:
-    // Helper functions
-    std::shared_ptr<ASTNode> parseExpression();
-    std::shared_ptr<ASTNode> parseTerm();
-    std::shared_ptr<ASTNode> parseFactor();
-
-    // Utility for managing tokens
-    const Token peek() const;
-    const Token advance();
-
-    // Parser state
-    std::vector<Token> tokens;
-    size_t pos;
+    ASTNode(ASTNodeType t, std::string v, KeywordType k = KeywordType::NONE)
+        : type(t), value(std::move(v)), keyword(k), left(nullptr), right(nullptr) {}
 };

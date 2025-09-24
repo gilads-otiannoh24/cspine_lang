@@ -5,12 +5,54 @@
 #include "byte.h"
 #include "opcode.h"
 #include "../Utils/keywords.h"
+#include <iostream>
 
 std::vector<Instruction> BytecodeGenerator::generate(const std::shared_ptr<ASTNode> &node)
 {
     instructions.clear();
     emitNode(node);
     return instructions;
+}
+
+void BytecodeGenerator::reset()
+{
+    instructions.clear();
+}
+
+void BytecodeGenerator::show()
+{
+    for (const auto &inst : instructions)
+    {
+        std::string opStr;
+        switch (inst.op)
+        {
+        case OpCode::PUSH:
+            opStr = "PUSH " + inst.operand;
+            break;
+        case OpCode::ADD:
+            opStr = "ADD";
+            break;
+        case OpCode::SUB:
+            opStr = "SUB";
+            break;
+        case OpCode::MUL:
+            opStr = "MUL";
+            break;
+        case OpCode::DIV:
+            opStr = "DIV";
+            break;
+        case OpCode::PRINT:
+            opStr = "PRINT";
+            break;
+        case OpCode::STORE:
+            opStr = "STORE " + inst.operand;
+            break;
+        case OpCode::LOAD:
+            opStr = "LOAD " + inst.operand;
+            break;
+        }
+        std::cout << opStr << "\n";
+    }
 }
 
 void BytecodeGenerator::emitNode(const std::shared_ptr<ASTNode> &node)

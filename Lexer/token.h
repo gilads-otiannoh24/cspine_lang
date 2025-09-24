@@ -13,6 +13,11 @@ enum class TokenType
     WORD,
     EOF_TOKEN,
     END_OF_FILE,
+    STORE,
+    LINE_END,
+    COMMA,
+    SEMICOLON,
+
 };
 
 struct Token
@@ -21,4 +26,10 @@ struct Token
     std::string value;
 
     Token(TokenType t, const std::string &v) : type(t), value(v) {}
+};
+
+struct TokenInfo
+{
+    TokenType type;
+    std::string value; // optional fixed value; if empty, we use the char itself
 };

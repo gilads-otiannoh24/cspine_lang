@@ -10,6 +10,8 @@ class BytecodeGenerator
 {
 public:
     std::vector<Instruction> generate(const std::shared_ptr<ASTNode> &node);
+    void reset();
+    void show();
 
 private:
     std::vector<Instruction> instructions;

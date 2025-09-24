@@ -1,7 +1,9 @@
 #pragma once
 #include "../AST/ast.h"
+#include "../AST/parser.h"
 #include "../Bytecode/opcode.h"
 #include <stack>
+#include <vector>
 
 class Evaluator
 {
